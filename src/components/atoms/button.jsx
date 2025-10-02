@@ -1,17 +1,19 @@
 import React from 'react';
 
-const Button = ({ children, onClick, variant = 'primary', ...props }) => {
-  const baseClasses = "font-bold py-2 px-4 rounded";
+const Button = ({ children, onClick, variant = 'primary', className = '', ...props }) => {
+  const baseClasses = "font-bold text-sm py-2 px-4 rounded-md transition-colors duration-300";
+
   const variants = {
-    primary: "bg-blue-500 hover:bg-blue-700 text-white",
-    secondary: "bg-gray-300 hover:bg-gray-400 text-gray-800",
-    // Agrega más variantes según necesites
+    primary: "bg-orange-standard text-white hover:bg-orange-dark",
+    danger: "bg-red-600 hover:bg-red-700 text-white",
   };
+
+  const variantClasses = variants[variant] || variants.primary;
 
   return (
     <button
-      className={`${baseClasses} ${variants[variant]}`}
       onClick={onClick}
+      className={`${baseClasses} ${variantClasses} ${className}`}
       {...props}
     >
       {children}

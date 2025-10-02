@@ -1,22 +1,19 @@
-import React from 'react';
-import HomePage from './pages/HomePage';
 
-// src/pages/HomePage.jsx
 import React from 'react';
 import Header from '../components/organisms/Header';
 import Hero from '../components/organisms/Hero';
 import Footer from '../components/organisms/Footer';
-// Más adelante agregaremos la sección de productos aquí
+import ProductosDestacados from '../components/organisms/ProductosDestacados';
 
 const HomePage = () => {
   return (
     <div className="bg-neutral-900">
       <Header />
       <Hero />
-      {/* <ProductHighlights /> */} {/* Aún no hemos creado este organismo */}
+      <ProductosDestacados />
       <Footer />
     </div>
   );
 };
 
-export default App;
+export default HomePage;
