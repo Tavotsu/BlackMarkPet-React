@@ -9,7 +9,6 @@ import BlogsPage from './pages/PaginaBlog';
 import AboutPage from './pages/PaginaNosotros';
 import ContactPage from './pages/PaginaContacto';
 
-
 function App() {
   return (
     <BrowserRouter>

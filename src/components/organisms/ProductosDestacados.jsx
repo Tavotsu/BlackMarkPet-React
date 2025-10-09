@@ -3,19 +3,19 @@ import ProductCard from '../molecules/ProductCard';
 
 const featuredProducts = [
     {
-        href: "/productos",
+        href: "/catalogo",
         imgSrc: "https://cdn.shopify.com/s/files/1/0102/3742/files/Ganador_936ee4de-362b-4b41-894f-0fbad4ba9e04.jpg?v=1611158640",
         title: "Comida Premium",
         description: "La mejor nutrición para tu fiel amigo."
     },
     {
-        href: "/productos",
+        href: "/catalogo",
         imgSrc: "https://st3.depositphotos.com/1593759/37151/i/450/depositphotos_371514964-stock-photo-pet-accessories-concept-dry-food.jpg",
         title: "Accesorios",
         description: "Todo lo que necesitas para el día a día."
     },
     {
-        href: "/productos",
+        href: "/catalogo",
         imgSrc: "https://acdn-us.mitiendanube.com/stores/880/994/products/mb-higiene-16-66c6c089cdaecefa6817006689517501-1024-1024.jpg",
         title: "Higiene y Cuidado",
         description: "Mantén a tu mascota limpia y saludable."
