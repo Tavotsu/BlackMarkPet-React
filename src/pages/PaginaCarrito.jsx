@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const PaginaCarrito = () => {
   const [cart, setCart] = useState([]);
 
@@ -74,9 +75,9 @@ const PaginaCarrito = () => {
             <h2 className="text-2xl font-bold text-white">
               Total: <span className="text-orange-standard">${calculateTotal().toLocaleString('es-CL')}</span>
             </h2>
-            <button className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition duration-300">
+            <Link to="/checkout" className="block text-center w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-md transition-colors">
               Proceder al Pago
-            </button>
+            </Link>
           </div>
         </>
       )}

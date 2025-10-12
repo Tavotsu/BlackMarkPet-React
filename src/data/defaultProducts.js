@@ -1,47 +1,10 @@
 export const defaultProducts = [
-  // --- Alimentos ---
-  {
-    id: 1,
-    name: 'Pellets para Cachorro',
-    price: 15990,
-    image: 'https://i5.walmartimages.cl/asr/f577b80a-1ed5-4033-ad46-65f389c1e3c1.930baeba80a94ea84c86810d784fe1eb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
-    category: 'alimento',
-  },
-  {
-    id: 2,
-    name: 'Snacks Dentales para Perro',
-    price: 7990,
-    image: 'https://purina.cl/sites/default/files/2022-10/purina-dentalife-perro-pequenio.png',
-    category: 'alimento',
-  },
-  // --- Juguetes ---
-  {
-    id: 3,
-    name: 'Pelota de Goma Resistente',
-    price: 4990,
-    image: 'https://cdnx.jumpseller.com/guaudor/image/43385770/resize/640/640?1702321041',
-    category: 'juguetes',
-  },
-  {
-    id: 4,
-    name: 'Rascador para Gatos',
-    price: 12990,
-    image: 'https://media.falabella.com/falabellaCL/130261315_01/w=1500,h=1500,fit=pad',
-    category: 'juguetes',
-  },
-  // --- Accesorios ---
-  {
-    id: 5,
-    name: 'Collar de Cuero Ajustable',
-    price: 9990,
-    image: 'https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/29020ede0905ce02932f417585f96a59.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp',
-    category: 'accesorios',
-  },
-  {
-    id: 6,
-    name: 'Cama Acolchada para Mascota',
-    price: 19990,
-    image: 'https://www.cic.cl/dw/image/v2/BDXB_PRD/on/demandware.static/-/Sites-masterCatalog_CIC/es_CL/dw4540712b/original/images/products/cama-acolchada-mascota-talla-s-03.jpg?sw=1500&sh=1500&sm=fit',
-    category: 'accesorios',
-  },
+  { id: 1, name: 'Comida para Perros Adultos', price: 25990, category: 'Alimentos', image: 'https://cdn.shopify.com/s/files/1/0102/3742/files/Ganador_936ee4de-362b-4b41-894f-0fbad4ba9e04.jpg?v=1611158640' },
+  { id: 2, name: 'Pelota de Goma Resistente', price: 7990, category: 'Juguetes', image: 'https://www.bpets.cl/cdn/shop/files/Pelota-Fetch-Goma-Natural-Beco-para-perros_2048x.jpg?v=1731114255' },
+  { id: 3, name: 'Shampoo Hipoalergénico', price: 12500, category: 'Higiene', image: 'https://dragpharma.cl/wp-content/uploads/2023/05/CANISH-HIPOALERGENICOP.jpg' },
+  { id: 4, name: 'Correa de Paseo Retráctil', price: 15990, category: 'Accesorios', image: 'https://i5.walmartimages.cl/asr/756edadc-d882-4264-b196-95f66ef8cb2b.c8e887a6e0d86fa402fad618bd71ec36.jpeg?odnHeight=2000&odnWidth=2000&odnBg=ffffff' },
+  { id: 5, name: 'Comida para Gatos Esterilizados', price: 28990, category: 'Alimentos', image: 'https://purina.cl/sites/default/files/styles/webp/public/2023-02/PurinaLatam-CatChow-DRY-Adulto-Esterilizados-01.png.webp?itok=ryJKWAfs' },
+  { id: 6, name: 'Rascador para Gatos', price: 19990, category: 'Juguetes', image: 'https://media.falabella.com/falabellaCL/130261315_01/w=1500,h=1500,fit=pad' },
+  { id: 7, name: 'Arena Sanitaria para Gatos', price: 11990, category: 'Higiene', image: 'https://www.buddypet.cl/wp-content/uploads/2021/08/1153408b.jpg' },
+  { id: 8, name: 'Cama Acolchada para Mascotas', price: 22990, category: 'Accesorios', image: 'https://www.cic.cl/dw/image/v2/BDXB_PRD/on/demandware.static/-/Sites-masterCatalog_CIC/es_CL/dw59a0067d/original/images/products/cama-acolchada-mascota-talla-l-116x76-cm-03.jpg?sw=1500&sh=1500&sm=fit' },
 ];

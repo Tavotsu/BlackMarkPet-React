@@ -11,8 +11,8 @@ const FilterSidebar = ({ onSelectCategory, selectedCategory }) => {
           <li key={category}>
             <button
               onClick={() => onSelectCategory(category)}
-              className={`w-full text-left text-lg font-medium hover:text-orange-standard transition-colors duration-200 ${
-                selectedCategory === category ? 'text-orange-standard' : 'text-white'
+              className={`w-full text-left text-lg font-medium hover:text-orange transition-colors duration-200 ${
+                selectedCategory === category ? 'text-gray-500' : 'text-white'
               }`}
             >
               {category}

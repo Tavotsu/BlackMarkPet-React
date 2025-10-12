@@ -40,6 +40,7 @@ const Header = () => {
           <ul className="flex items-center space-x-10 text-white font-bold text-sm">
             <NavLink to="/">Inicio</NavLink>
             <NavLink to="/catalogo">Catálogo</NavLink>
+            <NavLink to="/ofertas">Ofertas</NavLink>
             <NavLink to="/blogs">Blogs</NavLink>
             <NavLink to="/nosotros">Nosotros</NavLink>
             <NavLink to="/contacto">Contacto</NavLink>
@@ -91,6 +92,7 @@ const Header = () => {
           <ul className="flex flex-col items-center space-y-4 py-4 text-white font-bold text-sm">
             <li onClick={closeMenu}><NavLink to="/">Inicio</NavLink></li>
             <li onClick={closeMenu}><NavLink to="/catalogo">Catálogo</NavLink></li>
+            <li onClick={closeMenu}><NavLink to="/ofertas">Ofertas</NavLink></li>
             <li onClick={closeMenu}><NavLink to="/blogs">Blogs</NavLink></li>
             <li onClick={closeMenu}><NavLink to="/nosotros">Nosotros</NavLink></li>
             <li onClick={closeMenu}><NavLink to="/contacto">Contacto</NavLink></li>
