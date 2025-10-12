@@ -1,5 +1,3 @@
-// src/data/defaultProducts.js
-
 export const defaultProducts = [
   // --- Alimentos ---
   {
@@ -13,7 +11,7 @@ export const defaultProducts = [
     id: 2,
     name: 'Snacks Dentales para Perro',
     price: 7990,
-    image: 'https://www.lider.cl/preunic/images/product/149695/299390.jpg',
+    image: 'https://purina.cl/sites/default/files/2022-10/purina-dentalife-perro-pequenio.png',
     category: 'alimento',
   },
   // --- Juguetes ---
@@ -21,14 +19,14 @@ export const defaultProducts = [
     id: 3,
     name: 'Pelota de Goma Resistente',
     price: 4990,
-    image: 'https://http2.mlstatic.com/D_NQ_NP_899292-MLC73268846171_122023-O.webp',
+    image: 'https://cdnx.jumpseller.com/guaudor/image/43385770/resize/640/640?1702321041',
     category: 'juguetes',
   },
   {
     id: 4,
     name: 'Rascador para Gatos',
     price: 12990,
-    image: 'https://m.media-amazon.com/images/I/71nxkUWv05L._AC_UF894,1000_QL80_.jpg',
+    image: 'https://media.falabella.com/falabellaCL/130261315_01/w=1500,h=1500,fit=pad',
     category: 'juguetes',
   },
   // --- Accesorios ---
@@ -36,14 +34,14 @@ export const defaultProducts = [
     id: 5,
     name: 'Collar de Cuero Ajustable',
     price: 9990,
-    image: 'https://i.ebayimg.com/images/g/f4IAAOSwLwZkpsa0/s-l1600.jpg',
+    image: 'https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/29020ede0905ce02932f417585f96a59.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp',
     category: 'accesorios',
   },
   {
     id: 6,
     name: 'Cama Acolchada para Mascota',
     price: 19990,
-    image: 'https://falabella.scene7.com/is/image/Falabella/gsc_121516765_3037920_1?wid=800&hei=800&qlt=70',
+    image: 'https://www.cic.cl/dw/image/v2/BDXB_PRD/on/demandware.static/-/Sites-masterCatalog_CIC/es_CL/dw4540712b/original/images/products/cama-acolchada-mascota-talla-s-03.jpg?sw=1500&sh=1500&sm=fit',
     category: 'accesorios',
   },
 ];

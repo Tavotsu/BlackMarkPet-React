@@ -1,6 +1,5 @@
-// src/pages/PaginaAdmin.jsx
 import React from 'react';
-import { NavLink, Outlet, useLocation, Link } from 'react-router-dom'; // Importa Link
+import { NavLink, Outlet, useLocation, Link } from 'react-router-dom'; 
 import AdminDashboard from '../components/organisms/AdminDashboard';
 
 const PaginaAdmin = () => {

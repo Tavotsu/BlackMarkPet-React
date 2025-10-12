@@ -10,7 +10,7 @@ const CatalogProductCard = ({ product, onAddToCart }) => {
       <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-white">{product.name}</h3>
-        <p className="text-orange-standard font-semibold mt-1">${product.price.toLocaleString('es-CL')}</p>
+        <p className="text-white font-semibold mt-2 mb-1">${product.price.toLocaleString('es-CL')}</p>
         <button
           onClick={() => onAddToCart(product)}
           className="mt-auto w-full bg-orange-standard hover:bg-orange-dark text-white font-bold py-2 px-4 rounded-md transition-colors duration-300"

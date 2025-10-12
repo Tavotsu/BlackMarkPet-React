@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/organisms/Header';
@@ -13,7 +12,7 @@ import AboutPage from './pages/PaginaNosotros';
 import ContactPage from './pages/PaginaContacto';
 import PaginaRegistro from './pages/PaginaRegistro';
 import PaginaLogin from './pages/PaginaLogin';
-import PaginaCarrito from './pages/PaginaCarrito'; // <-- Importar la página del carrito
+import PaginaCarrito from './pages/PaginaCarrito';
 
 // Admin
 import PaginaAdmin from './pages/PaginaAdmin';
@@ -21,6 +20,7 @@ import RutaAdmin from './components/RutaAdmin';
 import AdminDashboard from './components/organisms/AdminDashboard';
 import GestionProductosAdmin from './components/organisms/GestionProductosAdmin';
 import GestionUsuariosAdmin from './components/organisms/GestionUsuariosAdmin';
+import PaginaEditarProducto from './pages/PaginaEditarProducto'; 
 
 const Layout = () => {
   const location = useLocation();
@@ -39,12 +39,13 @@ const Layout = () => {
           <Route path="/contacto" element={<ContactPage />} />
           <Route path="/login" element={<PaginaLogin />} />
           <Route path="/registro" element={<PaginaRegistro />} />
-          <Route path="/carrito" element={<PaginaCarrito />} /> {/* <-- Añadir la ruta del carrito */}
+          <Route path="/carrito" element={<PaginaCarrito />} />
           
           <Route element={<RutaAdmin />}>
             <Route path="/admin" element={<PaginaAdmin />}>
               <Route index element={<AdminDashboard />} />
               <Route path="productos" element={<GestionProductosAdmin />} />
+              <Route path="productos/editar/:id" element={<PaginaEditarProducto />} /> 
               <Route path="usuarios" element={<GestionUsuariosAdmin />} />
             </Route>
           </Route>

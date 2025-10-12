@@ -1,4 +1,3 @@
-// src/pages/PaginaRegistro.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -11,7 +10,7 @@ const PaginaRegistro = () => {
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
     return regex.test(password);
   };
 
@@ -31,8 +30,9 @@ const PaginaRegistro = () => {
     if (!validateEmail(email)) {
       setError('El correo debe pertenecer a @duocuc.cl o @profesor.duoc.cl.'); return;
     }
+
     if (!validatePassword(password)) {
-      setError('La contraseña debe tener al menos 8 caracteres, incluyendo un número y un símbolo especial.'); return;
+      setError('La contraseña debe tener al menos 8 caracteres, e incluir al menos una letra, un número y un símbolo (ej: @, $, !, *, ?, &).'); return;
     }
 
     const users = JSON.parse(localStorage.getItem('users')) || [];

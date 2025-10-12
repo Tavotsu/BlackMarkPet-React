@@ -1,7 +1,7 @@
-// src/components/organisms/GestionProductosAdmin.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { defaultProducts } from '../../data/defaultProducts'; // <-- 1. Importar los productos
+import { defaultProducts } from '../../data/defaultProducts';
 
 const GestionProductosAdmin = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +9,6 @@ const GestionProductosAdmin = () => {
   const [newProduct, setNewProduct] = useState({ name: '', price: '', image: '' });
 
   useEffect(() => {
-    // <-- 2. Lógica actualizada
     let storedProducts = JSON.parse(localStorage.getItem('products'));
 
     if (!storedProducts || storedProducts.length === 0) {
@@ -20,7 +19,6 @@ const GestionProductosAdmin = () => {
     setProducts(storedProducts);
   }, []);
 
-  // ... (El resto del componente, como handleAddProduct y handleDeleteProduct, no cambia)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewProduct({ ...newProduct, [name]: value });
@@ -64,7 +62,6 @@ const GestionProductosAdmin = () => {
   };
 
   return (
-    // ... (El JSX del componente no cambia)
     <div>
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-bold text-white">Gestión de Productos</h2>
@@ -94,7 +91,9 @@ const GestionProductosAdmin = () => {
                 <td className="p-4 font-medium text-white">{product.name}</td>
                 <td className="p-4">${product.price.toLocaleString('es-CL')}</td>
                 <td className="p-4 space-x-2">
-                  <button className="text-blue-400 hover:text-blue-300 font-semibold">Editar</button>
+                  <Link to={`/admin/productos/editar/${product.id}`} className="text-blue-400 hover:text-blue-300 font-semibold">
+                    Editar
+                  </Link>
                   <button onClick={() => handleDeleteProduct(product.id)} className="text-red-500 hover:text-red-400 font-semibold">Eliminar</button>
                 </td>
               </tr>

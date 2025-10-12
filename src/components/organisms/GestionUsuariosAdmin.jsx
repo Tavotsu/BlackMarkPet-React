@@ -1,6 +1,6 @@
 // src/components/organisms/GestionUsuariosAdmin.jsx
 import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2'; // <-- 1. Importar la librería
+import Swal from 'sweetalert2';
 
 const GestionUsuariosAdmin = () => {
     const [users, setUsers] = useState([]);
@@ -13,8 +13,10 @@ const GestionUsuariosAdmin = () => {
       setUsers(storedUsers);
     }, []);
 
+    // --- MODIFICADO ---
     const validatePassword = (password) => {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        // Regex actualizada para ser más flexible con los símbolos
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
         return regex.test(password);
     };
 
@@ -39,8 +41,9 @@ const GestionUsuariosAdmin = () => {
         if (!validateEmail(newUser.email)) {
             setError('El correo debe pertenecer a @duocuc.cl o @profesor.duoc.cl.'); return;
         }
+        // --- MODIFICADO ---
         if (!validatePassword(newUser.password)) {
-            setError('La contraseña debe tener al menos 8 caracteres, un número y un símbolo especial.'); return;
+            setError('La contraseña debe tener al menos 8 caracteres, e incluir al menos una letra, un número y un símbolo (ej: @, $, !, *, ?, &).'); return;
         }
         if (users.find(user => user.email === newUser.email)) {
             setError('Este correo electrónico ya está registrado.'); return;
@@ -50,7 +53,6 @@ const GestionUsuariosAdmin = () => {
         setUsers(updatedUsers);
         localStorage.setItem('users', JSON.stringify(updatedUsers));
 
-        // <-- 2. Reemplazar alerta
         Swal.fire({
             title: "¡Éxito!",
             text: "Usuario creado correctamente.",
@@ -66,12 +68,10 @@ const GestionUsuariosAdmin = () => {
     const handleDeleteUser = (emailToDelete) => {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.email === emailToDelete) {
-        // <-- 2. Reemplazar alerta
         Swal.fire("Error", "No puedes eliminarte a ti mismo.", "error");
         return;
       }
       
-      // <-- 2. Reemplazar alerta
       Swal.fire({
         title: "¿Estás seguro?",
         text: "Una vez eliminado, no podrás recuperar este usuario.",
@@ -93,7 +93,6 @@ const GestionUsuariosAdmin = () => {
   
     return (
       <div>
-        {/* El resto del código JSX no cambia... */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-white">Gestión de Usuarios</h2>
           <button onClick={() => setIsModalOpen(true)} className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors">

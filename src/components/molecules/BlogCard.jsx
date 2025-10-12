@@ -1,4 +1,3 @@
-// src/components/molecules/BlogCard.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ const BlogCard = ({ id, imageUrl, title, description }) => {
       <div className="relative p-8 flex flex-col justify-end h-full">
         <h2 className="text-2xl font-bold mb-2 text-white">{title}</h2>
         <p className="text-neutral-300 mb-4">{description}</p>
-        <span className="font-semibold text-orange-standard group-hover:underline">Ver noticia →</span>
+        <span className="font-semibold text-white group-hover:underline">Ver noticia →</span>
       </div>
     </Link>
   );
