@@ -2,20 +2,36 @@
 import React, { useState, useEffect } from 'react';
 import FilterSidebar from '../components/organisms/FilterSidebar';
 import CatalogProductCard from '../components/molecules/CatalogProductCard';
-import { defaultProducts } from '../data/defaultProducts';
+import axios from 'axios';
+
+const API_URL = 'http://localhost:3001/api';
 
 const PaginaCatalogo = () => {
-  const [products, setProducts] = useState(defaultProducts);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/productos`);
+        setAllProducts(response.data);
+        setFilteredProducts(response.data);
+      } catch (error) {
+        console.error("Error al cargar productos desde la API:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
     if (selectedCategory === 'Todos') {
-      setProducts(defaultProducts);
+      setFilteredProducts(allProducts);
     } else {
-      const filtered = defaultProducts.filter(p => p.category === selectedCategory);
-      setProducts(filtered);
+      const filtered = allProducts.filter(p => p.category === selectedCategory);
+      setFilteredProducts(filtered);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, allProducts]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -27,7 +43,7 @@ const PaginaCatalogo = () => {
         />
         <main className="w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map(product => (
+            {filteredProducts.map(product => (
               <CatalogProductCard key={product.id} product={product} />
             ))}
           </div>
