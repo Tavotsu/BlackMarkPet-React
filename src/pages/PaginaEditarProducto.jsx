@@ -1,52 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const PaginaEditarProducto = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState({ name: '', price: '', image: '' });
+  const [product, setProduct] = useState({ name: '', price: '', image: '', category: '' });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const products = JSON.parse(localStorage.getItem('products')) || [];
-    const productToEdit = products.find(p => p.id === parseInt(id));
-
-    if (productToEdit) {
-      setProduct(productToEdit);
-    } else {
-      Swal.fire('Error', 'Producto no encontrado.', 'error');
-      navigate('/admin/productos');
-    }
-    setLoading(false);
+    const fetchProduct = async () => {
+        try {
+            const res = await axios.get(`http://localhost:3001/api/productos/${id}`);
+            setProduct(res.data);
+            setLoading(false);
+        } catch (error) {
+            Swal.fire('Error', 'Producto no encontrado.', 'error');
+            navigate('/admin/productos');
+        }
+    };
+    fetchProduct();
   }, [id, navigate]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-  };
+  const handleInputChange = (e) => setProduct({ ...product, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!product.name || !product.price || !product.image) {
-      Swal.fire('Error', 'Por favor, completa todos los campos.', 'error');
-      return;
+    try {
+        await axios.put(`http://localhost:3001/api/productos/${id}`, { ...product, price: Number(product.price) });
+        Swal.fire('¡Guardado!', 'Producto actualizado.', 'success');
+        navigate('/admin/productos');
+    } catch (error) {
+        Swal.fire('Error', 'No se pudo actualizar.', 'error');
     }
-
-    const products = JSON.parse(localStorage.getItem('products')) || [];
-    const updatedProducts = products.map(p =>
-      p.id === parseInt(id) ? { ...product, price: Number(product.price) } : p
-    );
-
-    localStorage.setItem('products', JSON.stringify(updatedProducts));
-
-    Swal.fire('¡Guardado!', 'El producto ha sido actualizado.', 'success');
-    navigate('/admin/productos');
   };
 
-  if (loading) {
-    return <p className="text-white text-center">Cargando...</p>;
-  }
+  if (loading) return <p className="text-white text-center">Cargando...</p>;
 
   return (
     <div className="bg-neutral-900 text-white p-8">
@@ -54,49 +44,18 @@ const PaginaEditarProducto = () => {
         <h1 className="text-3xl font-bold mb-6">Editar Producto</h1>
         <div className="bg-neutral-800 p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-1">Nombre del Producto</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={product.name}
-                onChange={handleInputChange}
-                className="w-full p-3 bg-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-standard"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="price" className="block text-sm font-medium text-neutral-300 mb-1">Precio</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={product.price}
-                onChange={handleInputChange}
-                className="w-full p-3 bg-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-standard"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="image" className="block text-sm font-medium text-neutral-300 mb-1">URL de la Imagen</label>
-              <input
-                type="text"
-                id="image"
-                name="image"
-                value={product.image}
-                onChange={handleInputChange}
-                className="w-full p-3 bg-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-standard"
-                required
-              />
-            </div>
+            <input type="text" name="name" value={product.name} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
+            <input type="number" name="price" value={product.price} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
+            <input type="text" name="image" value={product.image} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
+            <select name="category" value={product.category} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white">
+                <option value="Alimentos">Alimentos</option>
+                <option value="Juguetes">Juguetes</option>
+                <option value="Higiene">Higiene</option>
+                <option value="Accesorios">Accesorios</option>
+            </select>
             <div className="flex justify-end space-x-4 pt-4">
-              <Link to="/admin/productos" className="py-2 px-5 bg-neutral-600 hover:bg-neutral-500 text-white font-semibold rounded-md">
-                Cancelar
-              </Link>
-              <button type="submit" className="py-2 px-5 bg-orange-standard hover:bg-orange-dark text-white font-bold rounded-md">
-                Guardar Cambios
-              </button>
+              <Link to="/admin/productos" className="py-2 px-5 bg-neutral-600 rounded-md">Cancelar</Link>
+              <button type="submit" className="py-2 px-5 bg-orange-standard font-bold rounded-md">Guardar Cambios</button>
             </div>
           </form>
         </div>
