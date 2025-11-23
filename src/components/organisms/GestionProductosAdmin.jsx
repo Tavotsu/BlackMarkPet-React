@@ -9,15 +9,23 @@ const GestionProductosAdmin = () => {
   const loadProducts = async () => {
     try {
       const response = await axios.get('http://localhost:3001/api/productos');
-      setProducts(Array.isArray(response.data) ? response.data : []);
+      const data = response.data;
+      
+      if (Array.isArray(data)) {
+        setProducts(data);
+      } else if (data && Array.isArray(data.products)) {
+        setProducts(data.products);
+      } else {
+        setProducts([]);
+      }
     } catch (error) {
       console.error('Error al cargar productos', error);
+      setProducts([]);
     }
   };
 
   useEffect(() => { loadProducts(); }, []);
 
-  // FUNCIÓN PARA AGREGAR PRODUCTO
   const handleAdd = async () => {
     const { value: formValues } = await Swal.fire({
       title: 'Nuevo Producto',

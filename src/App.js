@@ -17,7 +17,7 @@ import PaginaPagoFallido from './pages/PaginaPagoFallido';
 import PaginaAdmin from './pages/PaginaAdmin';
 import PaginaOfertas from './pages/PaginaOfertas';
 import PaginaEditarProducto from './pages/PaginaEditarProducto';
-import PaginaRetorno from './pages/PaginaRetorno'; // <--- NUEVO IMPORT
+import PaginaRetorno from './pages/PaginaRetorno';
 import RutaAdmin from './components/RutaAdmin';
 import './App.css';
 
@@ -42,10 +42,8 @@ function App() {
             <Route path="/pago-exitoso" element={<PaginaPagoExitoso />} />
             <Route path="/pago-fallido" element={<PaginaPagoFallido />} />
             
-            {/* RUTA PARA EL RETORNO DE WEBPAY */}
             <Route path="/pago-finalizado" element={<PaginaRetorno />} />
 
-            {/* Rutas Protegidas de Admin */}
             <Route path="/admin" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />
             <Route path="/admin/productos" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />
             <Route path="/admin/usuarios" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />

@@ -1,13 +1,18 @@
-// src/components/RutaAdmin.jsx
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const RutaAdmin = () => {
+const RutaAdmin = ({ children }) => {
+  
   const user = JSON.parse(localStorage.getItem('currentUser'));
 
-  // Si el usuario existe y su rol es 'admin', permite el acceso a las rutas anidadas.
-  // De lo contrario, lo redirige a la página de inicio.
-  return user && user.role === 'admin' ? <Outlet /> : <Navigate to="/" />;
+  
+  if (!user || user.role !== 'admin') {
+    
+    return <Navigate to="/" replace />;
+  }
+
+  
+  return children;
 };
 
 export default RutaAdmin;

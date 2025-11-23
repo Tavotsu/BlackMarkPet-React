@@ -11,12 +11,12 @@ const GestionUsuariosAdmin = () => {
       setUsers(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error al cargar usuarios', error);
+      setUsers([]);
     }
   };
 
   useEffect(() => { loadUsers(); }, []);
 
-  // FUNCIÓN PARA AGREGAR USUARIO
   const handleAdd = async () => {
     const { value: formValues } = await Swal.fire({
       title: 'Nuevo Usuario',
