@@ -21,7 +21,7 @@ const BlogsPage = () => {
   return (
     <main className="max-w-6xl mx-auto px-4 py-12 flex-grow">
       <div className="text-center">
-        <h1 className="text-white text-4xl font-bold mb-2">Noticias y Consejos</h1>
+        <h1 className="text-white text-4xl font-bold mb-2 pt-10">Noticias y Consejos</h1>
         <p className="text-white mb-10">Mantente al día con nuestras últimas novedades y consejos para el cuidado de tu mascota.</p>
       </div>
 

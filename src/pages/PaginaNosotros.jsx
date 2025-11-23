@@ -5,7 +5,7 @@ const AboutPage = () => {
     <div className="bg-neutral-900 text-white">
       <main className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl pt-10">
             Sobre BlackMarkpet
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">

@@ -44,7 +44,7 @@ const PaginaContacto = () => {
   return (
     <main className="max-w-4xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white">Contáctanos</h1>
+        <h1 className="text-4xl font-bold text-white pt-10">Contáctanos</h1>
         <p className="text-neutral-400 mt-2">¿Tienes alguna pregunta? Estamos aquí para ayudarte.</p>
       </div>
       <div className="bg-neutral-800 p-8 rounded-lg shadow-lg">
