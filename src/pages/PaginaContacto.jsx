@@ -33,7 +33,7 @@ const PaginaContacto = () => {
         confirmButtonColor: '#f97316' // Color naranja del botón
     });
 
-    // Limpiar el formulario después del envío
+    
     setFormData({
       name: '',
       email: '',
@@ -57,7 +57,7 @@ const PaginaContacto = () => {
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={handleChangea}
                 className="w-full p-3 bg-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-standard"
                 required
               />
