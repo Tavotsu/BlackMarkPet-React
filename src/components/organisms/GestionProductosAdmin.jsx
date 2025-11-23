@@ -1,107 +1,123 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const GestionProductosAdmin = () => {
   const [products, setProducts] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newProduct, setNewProduct] = useState({ name: '', price: '', image: '', category: 'Alimentos' });
 
-  const fetchProducts = async () => {
+  const loadProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/productos');
-      setProducts(res.data);
+      const response = await axios.get('http://localhost:3001/api/productos');
+      setProducts(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
-      console.error(error);
+      console.error('Error al cargar productos', error);
     }
   };
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => { loadProducts(); }, []);
 
-  const handleInputChange = (e) => setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
-
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:3001/api/productos', { ...newProduct, price: Number(newProduct.price) });
-      Swal.fire("¡Éxito!", "Producto añadido.", "success");
-      setIsModalOpen(false);
-      setNewProduct({ name: '', price: '', image: '', category: 'Alimentos' });
-      fetchProducts();
-    } catch (error) {
-      Swal.fire("Error", "No se pudo crear.", "error");
-    }
-  };
-
-  const handleDeleteProduct = (id) => {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      icon: "warning",
+  // FUNCIÓN PARA AGREGAR PRODUCTO
+  const handleAdd = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: 'Nuevo Producto',
+      background: '#333',
+      color: '#fff',
+      html:
+        '<input id="swal-name" class="swal2-input" placeholder="Nombre del Producto">' +
+        '<input id="swal-price" class="swal2-input" type="number" placeholder="Precio">' +
+        '<input id="swal-image" class="swal2-input" placeholder="URL de Imagen">' +
+        '<select id="swal-cat" class="swal2-input">' +
+          '<option value="Alimentos">Alimentos</option>' +
+          '<option value="Juguetes">Juguetes</option>' +
+          '<option value="Accesorios">Accesorios</option>' +
+          '<option value="Salud">Salud</option>' +
+        '</select>',
+      focusConfirm: false,
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await axios.delete(`http://localhost:3001/api/productos/${id}`);
-          Swal.fire("¡Eliminado!", "", "success");
-          fetchProducts();
-        } catch (error) {
-          Swal.fire("Error", "No se pudo eliminar.", "error");
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        return {
+          name: document.getElementById('swal-name').value,
+          price: document.getElementById('swal-price').value,
+          image: document.getElementById('swal-image').value,
+          category: document.getElementById('swal-cat').value
         }
       }
     });
+
+    if (formValues) {
+      try {
+        await axios.post('http://localhost:3001/api/productos', formValues);
+        Swal.fire({ icon: 'success', title: 'Producto Creado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
+        loadProducts();
+      } catch (error) {
+        Swal.fire('Error', 'No se pudo crear el producto', 'error');
+      }
+    }
+  };
+
+  const handleDelete = async (id, name) => {
+    const result = await Swal.fire({
+      title: '¿Eliminar?', text: `Se borrará "${name}"`, icon: 'warning',
+      showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, borrar',
+      background: '#333', color: '#fff'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:3001/api/productos/${id}`);
+        loadProducts();
+        Swal.fire({ icon: 'success', title: 'Eliminado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
+      } catch (error) { Swal.fire('Error', 'Fallo al eliminar', 'error'); }
+    }
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold text-white">Gestión de Productos</h2>
-        <button onClick={() => setIsModalOpen(true)} className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md">Añadir Producto</button>
+    <div className="bg-neutral-900 p-6 rounded-lg">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-white">Inventario de Productos</h2>
+        <button onClick={handleAdd} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-bold transition">
+          + Agregar Producto
+        </button>
       </div>
-      <div className="bg-neutral-800 rounded-lg shadow-lg overflow-x-auto">
+
+      <div className="overflow-x-auto">
         <table className="w-full text-left text-neutral-300">
-          <thead className="bg-neutral-700 text-sm uppercase"><tr><th className="p-4">Imagen</th><th className="p-4">Nombre</th><th className="p-4">Precio</th><th className="p-4">Acciones</th></tr></thead>
-          <tbody>
-            {products.map(p => (
-              <tr key={p.id} className="border-b border-neutral-700 hover:bg-neutral-600">
-                <td className="p-4"><img src={p.image} alt={p.name} className="w-16 h-16 object-cover rounded-md" /></td>
-                <td className="p-4 text-white">{p.name}</td>
-                <td className="p-4">${p.price.toLocaleString('es-CL')}</td>
-                <td className="p-4 space-x-2">
-                  <Link to={`/admin/productos/editar/${p.id}`} className="text-blue-400 hover:text-blue-300 font-semibold">Editar</Link>
-                  <button onClick={() => handleDeleteProduct(p.id)} className="text-red-500 hover:text-red-400 font-semibold">Eliminar</button>
+          <thead className="bg-neutral-800 text-orange-standard uppercase text-sm">
+            <tr>
+              <th className="p-3">Imagen</th>
+              <th className="p-3">Nombre</th>
+              <th className="p-3">Categoría</th>
+              <th className="p-3">Precio</th>
+              <th className="p-3 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-neutral-700">
+            {products.map((product) => (
+              <tr key={product.id} className="hover:bg-neutral-800 transition">
+                <td className="p-3">
+                  <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                </td>
+                <td className="p-3 font-medium text-white">{product.name}</td>
+                <td className="p-3 text-sm">{product.category}</td>
+                <td className="p-3 text-green-400 font-bold">${Number(product.price).toLocaleString('es-CL')}</td>
+                <td className="p-3 text-center space-x-2">
+                  <Link to={`/admin/editar-producto/${product.id}`} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition">
+                    Editar
+                  </Link>
+                  <button onClick={() => handleDelete(product.id, product.name)} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition">
+                    Borrar
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-            <div className="bg-neutral-800 p-8 rounded-lg w-full max-w-md">
-              <h3 className="text-2xl font-bold text-white mb-6">Nuevo Producto</h3>
-              <form onSubmit={handleAddProduct} className="space-y-4">
-                <input type="text" name="name" placeholder="Nombre" value={newProduct.name} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
-                <input type="number" name="price" placeholder="Precio" value={newProduct.price} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
-                <input type="text" name="image" placeholder="URL Imagen" value={newProduct.image} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white" required />
-                <select name="category" value={newProduct.category} onChange={handleInputChange} className="w-full p-3 bg-neutral-700 rounded-md text-white">
-                  <option value="Alimentos">Alimentos</option>
-                  <option value="Juguetes">Juguetes</option>
-                  <option value="Higiene">Higiene</option>
-                  <option value="Accesorios">Accesorios</option>
-                </select>
-                <div className="flex justify-end space-x-4 pt-4">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="py-2 px-5 bg-neutral-600 text-white rounded-md">Cancelar</button>
-                  <button type="submit" className="py-2 px-5 bg-orange-standard text-white font-bold rounded-md">Guardar</button>
-                </div>
-              </form>
-            </div>
-          </div>
-      )}
     </div>
   );
 };
 
-export default GestionProductosAdmin; 
+export default GestionProductosAdmin;

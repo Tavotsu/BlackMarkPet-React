@@ -1,76 +1,62 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/organisms/Header';
 import Footer from './components/organisms/Footer';
-
-// Páginas Públicas
-import HomePage from './pages/PaginaPrincipal';
-import CatalogPage from './pages/PaginaCatalogo';
-import PaginaOfertas from './pages/PaginaOfertas';
-import BlogsPage from './pages/PaginaBlog';
-import PaginaDetalleBlog from './pages/PaginaDetalleBlog';
-import AboutPage from './pages/PaginaNosotros';
-import ContactPage from './pages/PaginaContacto';
-import PaginaRegistro from './pages/PaginaRegistro';
+import PaginaPrincipal from './pages/PaginaPrincipal';
 import PaginaLogin from './pages/PaginaLogin';
+import PaginaRegistro from './pages/PaginaRegistro';
+import PaginaCatalogo from './pages/PaginaCatalogo';
+import PaginaDetalleBlog from './pages/PaginaDetalleBlog';
+import PaginaBlog from './pages/PaginaBlog';
+import PaginaContacto from './pages/PaginaContacto';
+import PaginaNosotros from './pages/PaginaNosotros';
 import PaginaCarrito from './pages/PaginaCarrito';
 import PaginaCheckout from './pages/PaginaCheckout';
 import PaginaPagoExitoso from './pages/PaginaPagoExitoso';
 import PaginaPagoFallido from './pages/PaginaPagoFallido';
-
-// Admin
 import PaginaAdmin from './pages/PaginaAdmin';
-import RutaAdmin from './components/RutaAdmin';
-import AdminDashboard from './components/organisms/AdminDashboard';
-import GestionProductosAdmin from './components/organisms/GestionProductosAdmin';
-import GestionUsuariosAdmin from './components/organisms/GestionUsuariosAdmin';
+import PaginaOfertas from './pages/PaginaOfertas';
 import PaginaEditarProducto from './pages/PaginaEditarProducto';
-
-const Layout = () => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
-
-  return (
-    <div className="bg-neutral-900 min-h-screen flex flex-col">
-      {!isAdminRoute && <Header />}
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/catalogo" element={<CatalogPage />} />
-          <Route path="/ofertas" element={<PaginaOfertas />} /> 
-          <Route path="/blogs" element={<BlogsPage />} />
-          <Route path="/blog/:id" element={<PaginaDetalleBlog />} />
-          <Route path="/nosotros" element={<AboutPage />} />
-          <Route path="/contacto" element={<ContactPage />} />
-          <Route path="/login" element={<PaginaLogin />} />
-          <Route path="/registro" element={<PaginaRegistro />} />
-          <Route path="/carrito" element={<PaginaCarrito />} />
-          <Route path="/carrito" element={<PaginaCarrito />} />
-          <Route path="/checkout" element={<PaginaCheckout />} /> 
-          <Route path="/pago-exitoso" element={<PaginaPagoExitoso />} />
-          <Route path="/pago-fallido" element={<PaginaPagoFallido />} />
-  
-          
-          <Route element={<RutaAdmin />}>
-            <Route path="/admin" element={<PaginaAdmin />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="productos" element={<GestionProductosAdmin />} />
-              <Route path="productos/editar/:id" element={<PaginaEditarProducto />} /> 
-              <Route path="usuarios" element={<GestionUsuariosAdmin />} />
-            </Route>
-          </Route>
-        </Routes>
-      </main>
-      {!isAdminRoute && <Footer />}
-    </div>
-  );
-};
+import PaginaRetorno from './pages/PaginaRetorno'; // <--- NUEVO IMPORT
+import RutaAdmin from './components/RutaAdmin';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+    <Router>
+      <div className="flex flex-col min-h-screen bg-neutral-900">
+        <Header />
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<PaginaPrincipal />} />
+            <Route path="/login" element={<PaginaLogin />} />
+            <Route path="/registro" element={<PaginaRegistro />} />
+            <Route path="/catalogo" element={<PaginaCatalogo />} />
+            <Route path="/ofertas" element={<PaginaOfertas />} />
+            <Route path="/blog" element={<PaginaBlog />} />
+            <Route path="/blog/:id" element={<PaginaDetalleBlog />} />
+            <Route path="/contacto" element={<PaginaContacto />} />
+            <Route path="/nosotros" element={<PaginaNosotros />} />
+            <Route path="/carrito" element={<PaginaCarrito />} />
+            <Route path="/checkout" element={<PaginaCheckout />} />
+            <Route path="/pago-exitoso" element={<PaginaPagoExitoso />} />
+            <Route path="/pago-fallido" element={<PaginaPagoFallido />} />
+            
+            {/* RUTA PARA EL RETORNO DE WEBPAY */}
+            <Route path="/pago-finalizado" element={<PaginaRetorno />} />
+
+            {/* Rutas Protegidas de Admin */}
+            <Route path="/admin" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />
+            <Route path="/admin/productos" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />
+            <Route path="/admin/usuarios" element={<RutaAdmin><PaginaAdmin /></RutaAdmin>} />
+            <Route path="/admin/editar-producto/:id" element={<RutaAdmin><PaginaEditarProducto /></RutaAdmin>} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
