@@ -1,4 +1,3 @@
-// src/pages/PaginaDetalleBlog.jsx
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ const blogsData = [
     description: 'Accede a servicios profesionales directamente en nuestra tienda.',
     fullContent: (
       <>
-        <p className="mb-4 text-neutral-300">
+        <p className="mb-4 text-neutral-300 ">
           ¡Estamos emocionados de anunciar una nueva adición a nuestros servicios en BlackMarkpet!
           Pronto, ofreceremos servicios de tratamiento veterinario directamente en nuestra tienda.
           Sabemos lo importante que es la salud de tus mascotas, y queremos facilitarte el acceso
@@ -64,7 +63,8 @@ const PaginaDetalleBlog = () => {
 
   if (!blog) {
     return (
-      <div className="text-white text-center py-20">
+      // También bajamos el mensaje de error por si acaso
+      <div className="text-white text-center py-20 pt-40">
         <h1 className="text-4xl font-bold">Noticia no encontrada</h1>
         <p className="text-xl mt-4">La noticia que buscas no existe.</p>
         <Link to="/blogs" className="mt-8 inline-block bg-orange-standard hover:bg-orange-dark text-white font-bold py-2 px-6 rounded transition duration-300">
@@ -75,7 +75,8 @@ const PaginaDetalleBlog = () => {
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12 flex-grow">
+    // AQUÍ ESTÁ EL CAMBIO: cambié 'py-12' por 'pt-40 pb-12' para bajar todo el bloque
+    <main className="max-w-4xl mx-auto px-4 pt-40 pb-12 flex-grow">
       <div className="text-center mb-8">
         <img src={blog.imageUrl} alt={blog.title} className="w-full h-80 object-cover rounded-lg mb-6 shadow-lg" />
         <h1 className="text-4xl font-bold mb-4 text-white">{blog.title}</h1>

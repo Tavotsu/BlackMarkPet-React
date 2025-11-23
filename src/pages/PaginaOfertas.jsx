@@ -53,7 +53,7 @@ const PaginaOfertas = () => {
   return (
     <div className="bg-neutral-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-white mb-4 pt-10">
+        <h1 className="text-4xl font-bold text-center text-white mb-4 pt-15">
           Super <span className="text-orange-standard ">Ofertas</span>
         </h1>
         <p className="text-center text-gray-400 mb-12">
