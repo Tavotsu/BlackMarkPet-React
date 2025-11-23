@@ -1,6 +1,6 @@
-// src/pages/PaginaContacto.jsx
+
 import React, { useState } from 'react';
-import Swal from 'sweetalert2'; // <-- 1. Importar la librería
+import Swal from 'sweetalert2'; 
 
 const PaginaContacto = () => {
   const [formData, setFormData] = useState({
@@ -20,17 +20,14 @@ const PaginaContacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Aquí iría la lógica para enviar el formulario a un backend.
-    // Por ahora, solo mostramos la alerta y reseteamos el formulario.
-
-    // <-- 2. Reemplazar alerta
+   
     Swal.fire({
         title: "¡Mensaje Enviado!",
         text: "Gracias por contactarnos. Te responderemos a la brevedad.",
         icon: "success",
         background: '#333',
         color: '#fff',
-        confirmButtonColor: '#f97316' // Color naranja del botón
+        confirmButtonColor: '#f97316' 
     });
 
     
@@ -57,7 +54,7 @@ const PaginaContacto = () => {
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleChangea}
+                onChange={handleChange}
                 className="w-full p-3 bg-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-standard"
                 required
               />
