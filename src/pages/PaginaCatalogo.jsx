@@ -11,7 +11,7 @@ const PaginaCatalogo = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/productos');
+        const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/productos');
         setAllProducts(response.data);
         setFilteredProducts(response.data);
       } catch (error) {

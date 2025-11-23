@@ -18,7 +18,7 @@ const PaginaRetorno = () => {
 
     const confirmPayment = async () => {
       try {
-        const response = await axios.post('http://localhost:3001/api/payment/commit', {
+        const response = await axios.post('https://backend-bmp-express-production.up.railway.app/api/payment/commit', {
           token_ws: token
         });
 

@@ -27,7 +27,7 @@ const PaginaRegistro = () => {
 
     try {
       // CONEXIÓN CON BACKEND
-      await axios.post('http://localhost:3001/api/auth/register', {
+      await axios.post('https://backend-bmp-express-production.up.railway.app/api/auth/register', {
         name,
         email,
         password

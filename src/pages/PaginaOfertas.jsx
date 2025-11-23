@@ -9,7 +9,7 @@ const PaginaOfertas = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/productos');
+        const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/productos');
         const data = response.data;
         const productList = Array.isArray(data) ? data : (data.products || []);
         

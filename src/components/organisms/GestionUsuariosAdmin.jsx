@@ -7,7 +7,7 @@ const GestionUsuariosAdmin = () => {
 
   const loadUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/users');
+      const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/users');
       setUsers(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error al cargar usuarios', error);
@@ -46,7 +46,7 @@ const GestionUsuariosAdmin = () => {
 
     if (formValues) {
       try {
-        await axios.post('http://localhost:3001/api/users', formValues);
+        await axios.post('https://backend-bmp-express-production.up.railway.app/api/users', formValues);
         Swal.fire({ icon: 'success', title: 'Usuario Creado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
         loadUsers();
       } catch (error) {
@@ -78,7 +78,7 @@ const GestionUsuariosAdmin = () => {
 
     if (formValues) {
       try {
-        await axios.put(`http://localhost:3001/api/users/${user.id}`, formValues);
+        await axios.put(`https://backend-bmp-express-production.up.railway.app/api/users/${user.id}`, formValues);
         Swal.fire({ icon: 'success', title: 'Actualizado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
         loadUsers();
       } catch (error) { Swal.fire('Error', 'No se pudo actualizar', 'error'); }
@@ -92,7 +92,7 @@ const GestionUsuariosAdmin = () => {
     });
     if (result.isConfirmed) {
         try {
-            await axios.delete(`http://localhost:3001/api/users/${id}`);
+            await axios.delete(`https://backend-bmp-express-production.up.railway.app/api/users/${id}`);
             loadUsers();
             Swal.fire({ icon: 'success', title: 'Eliminado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
         } catch (e) { Swal.fire('Error', 'Falló la eliminación', 'error'); }

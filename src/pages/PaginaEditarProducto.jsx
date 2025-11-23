@@ -11,7 +11,7 @@ const PaginaEditarProducto = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/productos/${id}`);
+        const response = await axios.get(`https://backend-bmp-express-production.up.railway.app/api/productos/${id}`);
         setProduct(response.data);
       } catch (error) {
         Swal.fire('Error', 'Producto no encontrado.', 'error');
@@ -29,7 +29,7 @@ const PaginaEditarProducto = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/api/productos/${id}`, product);
+      await axios.put(`https://backend-bmp-express-production.up.railway.app/api/productos/${id}`, product);
       Swal.fire({
           title: '¡Actualizado!',
           text: 'El producto se guardó correctamente.',

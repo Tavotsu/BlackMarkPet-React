@@ -45,7 +45,7 @@ const PaginaCheckout = () => {
 
     try {
       
-      const response = await axios.post('http://localhost:3001/api/payment/init', {
+      const response = await axios.post('https://backend-bmp-express-production.up.railway.app/api/payment/init', {
         userId: user.id,
         total: total,
         items: cartItems.map(item => ({

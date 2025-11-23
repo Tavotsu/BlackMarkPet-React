@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/dashboard');
+        const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/dashboard');
         setStats(response.data || { users: 0, products: 0, orders: 0, totalSales: 0 });
       } catch (error) {
         console.error("Error cargando estadísticas:", error);

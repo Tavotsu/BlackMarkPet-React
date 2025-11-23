@@ -9,7 +9,7 @@ const OfertasDestacadas = () => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/productos');
+        const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/productos');
         const data = response.data;
         
         let productList = [];

@@ -15,7 +15,7 @@ const PaginaLogin = () => {
 
     try {
       // CONEXIÓN CON BACKEND
-      const response = await axios.post('http://localhost:3001/api/auth/login', {
+      const response = await axios.post('https://backend-bmp-express-production.up.railway.app/api/auth/login', {
         email,
         password
       });

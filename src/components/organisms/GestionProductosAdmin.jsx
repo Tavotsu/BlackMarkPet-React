@@ -8,7 +8,7 @@ const GestionProductosAdmin = () => {
 
   const loadProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/productos');
+      const response = await axios.get('https://backend-bmp-express-production.up.railway.app/api/productos');
       const data = response.data;
       
       if (Array.isArray(data)) {
@@ -57,7 +57,7 @@ const GestionProductosAdmin = () => {
 
     if (formValues) {
       try {
-        await axios.post('http://localhost:3001/api/productos', formValues);
+        await axios.post('https://backend-bmp-express-production.up.railway.app/api/productos', formValues);
         Swal.fire({ icon: 'success', title: 'Producto Creado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
         loadProducts();
       } catch (error) {
@@ -75,7 +75,7 @@ const GestionProductosAdmin = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3001/api/productos/${id}`);
+        await axios.delete(`https://backend-bmp-express-production.up.railway.app/api/productos/${id}`);
         loadProducts();
         Swal.fire({ icon: 'success', title: 'Eliminado', showConfirmButton: false, timer: 1500, background: '#333', color: '#fff' });
       } catch (error) { Swal.fire('Error', 'Fallo al eliminar', 'error'); }
